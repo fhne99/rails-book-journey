@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_21_153945) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_23_145048) do
   create_table "books", force: :cascade do |t|
     t.string "title"
     t.string "author"
@@ -21,6 +21,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_21_153945) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "cover_url"
+    t.string "status", default: "not_started"
   end
 
 end

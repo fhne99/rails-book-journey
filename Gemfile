@@ -47,8 +47,9 @@ gem "bootsnap", require: false
 gem "autoprefixer-rails"
 gem "font-awesome-sass", "~> 6.1"
 gem "simple_form", github: "heartcombo/simple_form"
+gem "bootstrap"
 gem "sassc-rails"
-gem 'httparty'
+gem "httparty"
 
 
 group :development, :test do
