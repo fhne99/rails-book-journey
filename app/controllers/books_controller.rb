@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  before_action :set_event, only: [:show, :destroy]
+  before_action :set_book, only: [:show, :edit, :update, :destroy]
 
 
   def index
@@ -21,6 +21,16 @@ class BooksController < ApplicationController
     end
   end
 
+  def edit; end
+
+  def update
+    if @book.update(book_params)
+      redirect_to book_path(@book), notice: 'Votre lecture a bien été modifiée.'
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   def destroy
     @book.destroy
     redirect_to books_path, notice: 'Votre livre a bien été enlevé de vos lectures.', status: :see_other
@@ -33,6 +43,6 @@ class BooksController < ApplicationController
   end
 
   def book_params
-    params.require(:book).permit(:title, :author, :start_date, :end_date, :rating, :comment)
+    params.require(:book).permit(:title, :author, :start_date, :end_date, :rating, :comment, :cover_url)
   end
 end

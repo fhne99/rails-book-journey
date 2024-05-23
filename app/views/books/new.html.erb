@@ -1,0 +1,13 @@
+<%= simple_form_for @book do |f| %>
+  <%= f.input :title, label: "Auteur de votre lecture" %>
+  <%= f.input :author, label: "Titre de votre lecture" %>
+  <%= f.input :cover_url %>
+  <%= f.input :comment, label: "Commentaire sur votre lecture" %>
+  <%= f.input :rating, as: :integer, label: "Note de votre lecture" %>
+  <%= f.input :start_date, as: :datetime, label: "Date de début de votre lecture" %>
+  <%= f.input :end_date, as: :datetime, label: "Date de fin de votre lecture"  %>
+
+  <div class="actions">
+    <%= f.button :submit, "Ajouter ma lecture" %>
+  </div>
+<% end %>
