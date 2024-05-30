@@ -1,0 +1,20 @@
+.status-icon {
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+.status-icon.not-started {
+  color: #FFA500;
+}
+
+.status-icon.in-progress {
+  color: #0000FF;
+}
+
+.status-icon.finished {
+  color: #008000;
+}
+
+.status-icon.default {
+  color: #A9A9A9;
+}

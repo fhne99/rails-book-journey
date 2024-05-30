@@ -22,11 +22,8 @@
         </div>
         <h4 class="book-index-author"><%= book.author %></h6>
         <div class="book-index-reading-status">
-          <p class="card-text">
-            <strong>Statut :</strong> <%= book.status.humanize %>
-          </p>
-
-    </div>
+          <%= status_icon(book) %>
+        </div>
     <% end %>
   </div>
 </div>
