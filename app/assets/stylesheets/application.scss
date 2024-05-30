@@ -14,3 +14,8 @@
  *= require_self
  */
  @import "bootstrap";
+ @import "font-awesome";
+
+ // Import des composants
+@import 'components';
+@import "pages/books/index";
