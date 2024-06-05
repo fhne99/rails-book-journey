@@ -7,5 +7,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   resources :books
-  root 'books#index'
+  root 'books#home'
 end
