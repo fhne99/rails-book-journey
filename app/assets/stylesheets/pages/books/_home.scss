@@ -1,36 +1,68 @@
-.col-3 {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-
-}
-
-.card-book-index {
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 16px;
-  width: 200px;
-  text-align: center;
-  margin: 16px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.container-index-bibliothèque {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  height: 523px;
+  margin: 80px;
+}
+
+.title-bibliothèque {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-decoration: none;
+  color: #003559;
+  margin: 5px;
+}
+
+.book-tout-voir-link{
+  text-decoration: none;
+  color: #003559;
+}
+
+.col-3 {
+  display: flex;
   justify-content: center;
 }
 
+.card-book-index {
+  display: flex;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  width: 285px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  flex-direction: column;
+  align-items: center;
+  height: 532px;
+  justify-content: center;
+}
+
+.card-book-info {
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+}
+
 .book-index-title {
-  text-decoration: none;
   font-size: 18px;
   font-weight: bold;
   margin: 16px 0 8px 0;
+  color: black;
 }
+
+.book-index-link {
+  text-decoration: none;
+  color: #003559;
+}
+
 
 
 .book-index-reading-status{
   display: flex;
   flex-direction: row;
+  align-items: baseline;
+  justify-content: center;
+  font-size: 14px;
+  color: black;
 }
 
 .img-book-index {
@@ -40,6 +72,7 @@
 }
 
 .book-index-author {
+  padding: 1px;
   font-size: 14px;
   color: #757575;
   margin-bottom: 8px;
@@ -64,15 +97,9 @@
   color: #F0F0F0;
 }
 
-.book-index-reading-status {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  color: #757575;
-}
 
 .book-index-reading-status .fa {
   font-size: 20px;
   margin-right: 8px;
+  color: #5C9EAD;
 }
