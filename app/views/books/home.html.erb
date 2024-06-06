@@ -1,3 +1,11 @@
+<div class="container-navbar">
+  <div class="search-bar">
+    <input type="text" id="search-query" placeholder="Rechercher des livres..." />
+    <button id="search-button">Rechercher</button>
+  </div>
+  <div id="search-results" class="search-results"></div>
+</div>
+
 <div class="container-banner">
   <div class="banner-home-content">
     <h1 class="banner-title">Lisez aujourd'hui, souvenez-vous toujours.</h1>
@@ -5,41 +13,12 @@
   </div>
 </div>
 
-<%= link_to 'Nouveau livre', new_book_path, class: 'btn btn-primary mb-3' %>
+
 
 <div class="container-index-bibliothèque">
   <div class="title-bibliothèque">
     <h2>Ma bibliothèque</h2>
     <p><%= link_to 'Tout voir', books_path, class: 'book-tout-voir-link'%></p>
   </div>
-  <div class="row">
-    <% @books.each do |book| %>
-      <div class="col-3">
-        <div class="card-book-index">
-          <%= link_to book_path(book), class: 'book-index-link' do  %>
-            <div class="img-book-index">
-              <%= image_tag("book default.png") %>
-            </div>
-            <div class="card-book-info">
-              <h3 class="book-index-title"><%= book.title %></h5>
-              <div class="book-index-stars">
-                <% 5.times do |i| %>
-                  <% if i < book.rating %>
-                    <%= content_tag(:i, "", class: "fa fa-star fa-star-blue") %>
-                  <% else %>
-                    <%= content_tag(:i, "", class: "fa fa-star fa-star-grey") %>
-                  <% end %>
-                <% end %>
-              </div>
-              <h4 class="book-index-author"><%= book.author %></h6>
-              <div class="book-index-reading-status">
-                <%= status_icon(book) %>
-                <p><%= book.status.humanize %></p>
-              </div>
-            </div>
-          <% end %>
-        </div>
-      </div>
-    <% end %>
-  </div>
+  <%= render "card" %>
 </div>
