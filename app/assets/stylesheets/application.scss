@@ -18,6 +18,5 @@
 @import "font-awesome";
 
  // Import des composants
-@import 'components';
-@import 'components/status_icons';
-@import "pages/books/home";
+@import 'components/index';
+@import "pages/books/index";
