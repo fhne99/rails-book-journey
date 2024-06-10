@@ -1,27 +1,28 @@
 .container-banner {
+  display: flex;
   position: relative;
   background-image: url('banner.png');
   background-position: center;
   display: flex;
   color: white;
   width: auto;
-  height: 600px;
+  height: 85vh;
   border-radius: 10px;
   background-size: cover;
   margin: 80px;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
 }
 
 .banner-home-content {
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  justify-content: center;
-}
-
-
-.banner-title {
-  margin: 0 0 20px 0;
-  font-size: 48px;
+  display: flex;
+  flex-direction: column; /* Arrange les enfants verticalement */
+  align-items: center; /* Centre les enfants horizontalement */
+  text-align: center; /* Pour centrer le texte à l'intérieur */
+  position: relative; /* Nécessaire pour positionner le bouton */
+  position: absolute; /* Nécessaire pour positionner le bouton */
+  top: 90px;
 }
 
 .banner-button {
@@ -32,5 +33,10 @@
   text-decoration: none;
   border-radius: 5px;
   font-size: 1em;
-  align-self: flex-end;
+  display: inline-block;
+  align-self: flex-end; /* Aligne le bouton à la droite du conteneur */
+}
+
+.banner-title {
+  font-size: 48px;
 }
