@@ -38,22 +38,6 @@
   }
 }
 
-form {
-  display: flex;
-  flex-direction: row;
-
-  .form-control {
-    width: 300px;
-  }
-}
-
-.navbar-search {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-left: 10px;
-}
-
 .search {
   width: max-content;
   display: flex;
