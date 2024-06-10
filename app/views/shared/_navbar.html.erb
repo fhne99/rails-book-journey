@@ -1,31 +1,21 @@
-<div class="container-navbar">
-  <div class="image-book-journey">
-    <%= link_to root_path, class: 'navbar-brand' do %>
+<div class="navbar-container">
+  <div class="navbar-left">
+    <%= link_to root_path do %>
       <%= image_tag 'logo.png', alt: 'Logo', class: 'navbar-logo' %>
     <% end %>
   </div>
 
+  <div class="navbar-right">
+    <div class="navbar-links">
+      <%= link_to root_path, class: 'navbar-link' do %>
+        <i class="fa-regular fa-calendar"></i>
+        <p class="btn-text">Objectif</p>
+      <% end %>
 
-
-  <div class="navbar-links">
-    <div class="btn-objectif">
-      <%= link_to root_path do %>
-        <i class="fa-regular fa-calendar"></i> Objectif
+      <%= link_to books_path, class: 'navbar-link' do %>
+        <i class="fa-solid fa-chart-column"></i>
+        <p class="btn-text">Récap</p>
       <% end %>
     </div>
-
-    <div class="btn-recap">
-      <%= link_to books_path do %>
-        <i class="fa-solid fa-chart-column"></i> Recap
-      <% end %>
-    </div>
-
   </div>
-
-
-  <div class="search-bar">
-    <input type="text" id="search-query" placeholder="Rechercher des livres..." />
-    <button id="search-button">Rechercher</button>
-  </div>
-  <div id="search-results" class="search-results"></div>
 </div>
