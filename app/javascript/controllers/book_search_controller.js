@@ -11,6 +11,11 @@ export default class extends Controller {
     event.preventDefault()
     const query = this.queryTarget.value
 
+    if (query.length === 0) {
+      alert("Veuillez entrer un terme de recherche.")
+      return
+    }
+
     fetch(`https://openlibrary.org/search.json?q=${query}`)
       .then(response => response.json())
       .then((data) => {

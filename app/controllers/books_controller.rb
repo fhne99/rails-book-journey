@@ -39,6 +39,10 @@ class BooksController < ApplicationController
     redirect_to books_path, notice: 'Votre livre a bien été enlevé de vos lectures.', status: :see_other
   end
 
+  def search_results
+    @query = params[:query]
+  end
+
   private
 
   def set_book
