@@ -27,6 +27,9 @@
       </button>
     </div>
   </form>
+    <% if flash[:alert] %>
+      <p class="error-message"><%= flash[:alert] %></p>
+  <% end %>
   <div id="search-results" data-book-search-target="results"></div>
 </div>
 

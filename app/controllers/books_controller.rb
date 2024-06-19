@@ -40,7 +40,7 @@ class BooksController < ApplicationController
   end
 
   def search_results
-    @query = params[:query]
+    @query = params[:q]
   end
 
   private
