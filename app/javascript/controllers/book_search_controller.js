@@ -15,6 +15,6 @@ export default class extends Controller {
       alert("Veuillez entrer un terme de recherche.")
       return
     }
-    window.location.href = `/search_results.html?q=${encodeURIComponent(query)}`
+    window.location.href = `/search_results?q=${encodeURIComponent(query)}`
   }
 }

@@ -10,5 +10,6 @@ Rails.application.routes.draw do
 
   resources :books
   get 'search_results', to: 'books#search_results'
+  get 'books/add', to: 'books#add', as: 'add_book'
 
 end

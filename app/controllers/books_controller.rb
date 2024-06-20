@@ -43,6 +43,22 @@ class BooksController < ApplicationController
     @query = params[:q]
   end
 
+  def add
+    @book = Book.new(
+      title: params[:title],
+      author: params[:author],
+      published_year: params[:publish_year],
+      cover_url: params[:cover],
+      number_of_pages: params[:number_of_pages],
+    )
+
+    if @book.save
+      redirect_to root_path, notice: 'Le livre a été ajouté à votre bibliothèque.'
+    else
+      redirect_to root_path, alert: "Une erreur est survenue lors de l'ajout du livre."
+    end
+  end
+
   private
 
   def set_book
@@ -50,6 +66,6 @@ class BooksController < ApplicationController
   end
 
   def book_params
-    params.require(:book).permit(:title, :author, :start_date, :end_date, :rating, :comment, :cover_url, :status)
+    params.require(:book).permit(:title, :author, :start_date, :end_date, :rating, :comment, :cover_url, :status, :number_of_pages, :published_year)
   end
 end

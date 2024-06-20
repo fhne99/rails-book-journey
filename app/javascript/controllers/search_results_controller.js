@@ -30,16 +30,24 @@ export default class extends Controller {
   }
 
   displayResults(books) {
+    if (books.length === 0) {
+      this.resultsTarget.innerHTML = "<p>Aucun résultat trouvé.</p>"
+      return
+    }
+
     books.forEach(book => {
       const cardHtml = `
-        <div class="card">
+      <div class="col-3">
+        <div class="card-book-index">
           <img src="${book.cover}" alt="${book.title}">
-          <h2>${book.title}</h2>
-          <div class="info">
-            <p>Auteur : ${book.author}</p>
+          <div class="card-book-info">
+            <h3 class="book-index-title my-1">${book.title}</h3>
+            <h4 class="book-index-author">${book.author}</p>
             <p>Année de publication : ${book.publish_year}</p>
             <p>Pages : ${book.pages}</p>
+            <a href="/books/add?title=${encodeURIComponent(book.title)}&author=${encodeURIComponent(book.author)}&publish_year=${encodeURIComponent(book.publish_year)}&cover=${encodeURIComponent(book.cover)}&pages=${encodeURIComponent(book.pages)}" class="btn btn-primary">Ajouter à ma bibliothèque</a>
           </div>
+        </div>
         </div>
       `
 
