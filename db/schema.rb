@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_23_203257) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_23_203431) do
   create_table "books", force: :cascade do |t|
     t.string "title"
     t.string "author"
@@ -57,6 +57,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_23_203257) do
     t.index ["reset_password_token"], name: "index_models_on_reset_password_token", unique: true
   end
 
+  create_table "ratings", force: :cascade do |t|
+    t.integer "book_id", null: false
+    t.integer "user_id", null: false
+    t.integer "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_ratings_on_book_id"
+    t.index ["user_id"], name: "index_ratings_on_user_id"
+  end
+
   create_table "readings", force: :cascade do |t|
     t.string "status"
     t.date "start_date"
@@ -94,6 +104,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_23_203257) do
   add_foreign_key "comments", "users"
   add_foreign_key "libraries", "books"
   add_foreign_key "libraries", "users"
+  add_foreign_key "ratings", "books"
+  add_foreign_key "ratings", "users"
   add_foreign_key "readings", "books"
   add_foreign_key "readings", "users"
   add_foreign_key "wishlists", "books"
