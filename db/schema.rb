@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_23_201546) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_23_203257) do
   create_table "books", force: :cascade do |t|
     t.string "title"
     t.string "author"
@@ -26,6 +26,25 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_23_201546) do
     t.integer "number_of_pages"
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.integer "book_id", null: false
+    t.integer "user_id", null: false
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_comments_on_book_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "libraries", force: :cascade do |t|
+    t.integer "book_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_libraries_on_book_id"
+    t.index ["user_id"], name: "index_libraries_on_user_id"
+  end
+
   create_table "models", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -36,6 +55,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_23_201546) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_models_on_email", unique: true
     t.index ["reset_password_token"], name: "index_models_on_reset_password_token", unique: true
+  end
+
+  create_table "readings", force: :cascade do |t|
+    t.string "status"
+    t.date "start_date"
+    t.date "end_date"
+    t.integer "book_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_readings_on_book_id"
+    t.index ["user_id"], name: "index_readings_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -50,4 +81,21 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_23_201546) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "wishlists", force: :cascade do |t|
+    t.integer "book_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_wishlists_on_book_id"
+    t.index ["user_id"], name: "index_wishlists_on_user_id"
+  end
+
+  add_foreign_key "comments", "books"
+  add_foreign_key "comments", "users"
+  add_foreign_key "libraries", "books"
+  add_foreign_key "libraries", "users"
+  add_foreign_key "readings", "books"
+  add_foreign_key "readings", "users"
+  add_foreign_key "wishlists", "books"
+  add_foreign_key "wishlists", "users"
 end
