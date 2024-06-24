@@ -9,7 +9,15 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root 'books#home'
 
-  resources :books
+  resources :books do
+    resources :comments, only: [:create, :update, :destroy]
+    resources :ratings, only: [:create, :update, :destroy]
+  end
+
+  resources :wishlists
+  resources :libraries
+  resources :readings
+
   get 'search_results', to: 'books#search_results'
   get 'books/add', to: 'books#add', as: 'add_book'
 

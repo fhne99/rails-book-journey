@@ -10,7 +10,7 @@
               <h3 class="book-index-title"><%= book.title %></h5>
               <div class="book-index-stars">
                 <% 5.times do |i| %>
-                  <% if i < book.rating %>
+                  <% if i < book.rating.note %>
                     <%= content_tag(:i, "", class: "fa fa-star fa-star-blue") %>
                   <% else %>
                     <%= content_tag(:i, "", class: "fa fa-star fa-star-grey") %>
