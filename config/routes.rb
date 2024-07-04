@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   resources :books do
     resources :comments, only: [:create, :update, :destroy]
     resources :ratings, only: [:create, :update, :destroy]
+    resources :readings, only: [:create, :update, :destroy]
+    resources :ratings, only: [:create, :update, :destroy]
   end
 
   resources :wishlists
@@ -19,6 +21,5 @@ Rails.application.routes.draw do
   resources :readings
 
   get 'search_results', to: 'books#search_results'
-  get 'books/add', to: 'books#add', as: 'add_book'
 
 end
