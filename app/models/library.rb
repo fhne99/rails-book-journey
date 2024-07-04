@@ -1,4 +1,5 @@
 class Library < ApplicationRecord
-  has_and_belongs_to_many :books
   belongs_to :user
+  has_many :book_libraries
+  has_many :books, through: :book_libraries
 end

@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_04_095255) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_04_162543) do
+  create_table "book_libraries", force: :cascade do |t|
+    t.integer "book_id", null: false
+    t.integer "library_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_book_libraries_on_book_id"
+    t.index ["library_id"], name: "index_book_libraries_on_library_id"
+  end
+
   create_table "books", force: :cascade do |t|
     t.string "title"
     t.string "author"
@@ -19,13 +28,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_04_095255) do
     t.string "cover_url"
     t.integer "published_year"
     t.integer "number_of_pages"
-  end
-
-  create_table "books_libraries", id: false, force: :cascade do |t|
-    t.integer "library_id", null: false
-    t.integer "book_id", null: false
-    t.index ["book_id"], name: "index_books_libraries_on_book_id"
-    t.index ["library_id"], name: "index_books_libraries_on_library_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -88,6 +90,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_04_095255) do
     t.index ["user_id"], name: "index_wishlists_on_user_id"
   end
 
+  add_foreign_key "book_libraries", "books"
+  add_foreign_key "book_libraries", "libraries"
   add_foreign_key "comments", "books"
   add_foreign_key "comments", "users"
   add_foreign_key "libraries", "users"

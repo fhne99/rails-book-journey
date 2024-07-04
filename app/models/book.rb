@@ -1,7 +1,7 @@
 class Book < ApplicationRecord
   has_many :readings
-  has_and_belongs_to_many :libraries
-  
+  has_many :book_libraries
+  has_many :libraries, through: :book_libraries
 
   validates :title, presence: true, uniqueness: true
   validates :author, presence: true
