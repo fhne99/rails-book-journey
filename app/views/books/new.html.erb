@@ -3,14 +3,8 @@
 <%= simple_form_for @book do |f| %>
   <%= f.input :title %>
   <%= f.input :author %>
-  <%= f.input :start_date, as: :date %>
-  <%= f.input :end_date, as: :date %>
-  <%= f.input :rating, collection: 0..5 %>
-  <%= f.input :comment %>
   <%= f.input :published_year %>
   <%= f.input :number_of_pages %>
   <%= f.input :cover_url %>
-  <%= f.input :status, collection: Book::STATUSES.values.map { |status| [status.humanize, status] } %>
   <%= f.button :submit %>
 <% end %>
-

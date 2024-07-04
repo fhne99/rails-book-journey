@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_23_204047) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_04_095255) do
   create_table "books", force: :cascade do |t|
     t.string "title"
     t.string "author"
@@ -19,6 +19,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_23_204047) do
     t.string "cover_url"
     t.integer "published_year"
     t.integer "number_of_pages"
+  end
+
+  create_table "books_libraries", id: false, force: :cascade do |t|
+    t.integer "library_id", null: false
+    t.integer "book_id", null: false
+    t.index ["book_id"], name: "index_books_libraries_on_book_id"
+    t.index ["library_id"], name: "index_books_libraries_on_library_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -32,24 +39,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_23_204047) do
   end
 
   create_table "libraries", force: :cascade do |t|
-    t.integer "book_id", null: false
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["book_id"], name: "index_libraries_on_book_id"
     t.index ["user_id"], name: "index_libraries_on_user_id"
-  end
-
-  create_table "models", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_models_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_models_on_reset_password_token", unique: true
   end
 
   create_table "ratings", force: :cascade do |t|
@@ -97,7 +90,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_23_204047) do
 
   add_foreign_key "comments", "books"
   add_foreign_key "comments", "users"
-  add_foreign_key "libraries", "books"
   add_foreign_key "libraries", "users"
   add_foreign_key "ratings", "books"
   add_foreign_key "ratings", "users"
