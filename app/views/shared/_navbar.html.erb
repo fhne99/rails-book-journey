@@ -6,17 +6,36 @@
   </div>
 
   <div class="navbar-right">
-    <div class="navbar-links">
-      <%= link_to root_path, class: 'navbar-link' do %>
-        <i class="fa-regular fa-calendar"></i>
-        <p class="btn-text">Objectif</p>
-      <% end %>
+    <% if user_signed_in? %>
 
-      <%= link_to books_path, class: 'navbar-link' do %>
-        <i class="fa-solid fa-chart-column"></i>
-        <p class="btn-text">Récap</p>
-      <% end %>
-    </div>
+      <div class="navbar-links">
+        <%= link_to root_path, class: 'navbar-link' do %>
+          <i class="fa-regular fa-user"></i>
+          <p class="btn-text">Mon profil</p>
+        <% end %>
+
+        <%= link_to root_path, class: 'navbar-link' do %>
+          <i class="fa-regular fa-calendar"></i>
+          <p class="btn-text">Objectif</p>
+        <% end %>
+
+        <%= link_to books_path, class: 'navbar-link' do %>
+          <i class="fa-solid fa-chart-column"></i>
+          <p class="btn-text">Récap</p>
+        <% end %>
+      </div>
+
+    <% else %>
+
+      <div class="navbar-links">
+        <%= link_to new_user_session_path, class: 'navbar-link' do %>
+          <i class="fa-regular fa-user"></i>
+          <p class="btn-text">Se connecter</p>
+        <% end %>
+      </div>
+
+    <% end %>
+  </div>
 
 <div class="navbar-search" data-controller="book-search">
   <form data-action="submit->book-search#search">

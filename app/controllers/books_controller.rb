@@ -20,7 +20,7 @@ class BooksController < ApplicationController
     if @book.save
       redirect_to book_path(@book), notice: 'Votre livre a bien été ajouté à vos lectures.'
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_entity, alert: 'Erreur lors de l\'ajout du livre. Veuillez réessayer.'
     end
   end
 
@@ -50,6 +50,6 @@ class BooksController < ApplicationController
   end
 
   def book_params
-    params.require(:book).permit(:title, :author, :start_date, :end_date, :rating, :comment, :cover_url, :status, :number_of_pages, :published_year)
+    params.require(:book).permit(:title, :author, :cover_url, :number_of_pages, :published_year)
   end
 end

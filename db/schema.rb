@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_04_162543) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_28_141118) do
   create_table "book_libraries", force: :cascade do |t|
     t.integer "book_id", null: false
     t.integer "library_id", null: false
@@ -65,6 +65,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_04_162543) do
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "number_pages_read"
     t.index ["book_id"], name: "index_readings_on_book_id"
     t.index ["user_id"], name: "index_readings_on_user_id"
   end
