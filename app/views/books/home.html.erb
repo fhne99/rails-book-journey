@@ -5,5 +5,5 @@
     <h2>Ma bibliothèque</h2>
     <p><%= link_to 'Tout voir', books_path, class: 'book-tout-voir-link'%></p>
   </div>
-  <%= render "card" %>
+  <%= render "card" if @books.present? %>
 </div>

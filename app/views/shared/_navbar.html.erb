@@ -16,8 +16,7 @@
 
         <ul class="dropdown-menu" aria-labelledby="dropdownProfile">
           <li><%= link_to "Voir mon profil", user_path(current_user), class: "dropdown-item" %></li>
-          <li><%= link_to "Me déconnecter", destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
-        </ul>
+<%= link_to "Me déconnecter", destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, class: "dropdown-item" %>        </ul>
       </div>
 
       <div class="navbar-links">
