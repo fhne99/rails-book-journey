@@ -8,12 +8,19 @@
   <div class="navbar-right">
     <% if user_signed_in? %>
 
-      <div class="navbar-links">
-        <%= link_to root_path, class: 'navbar-link' do %>
+      <div class="dropdown">
+        <a class="navbar-link dropdown" href="#" role="button" id="dropdownProfile" data-bs-toggle="dropdown" aria-expanded="false">
           <i class="fa-regular fa-user"></i>
           <p class="btn-text">Mon profil</p>
-        <% end %>
+        </a>
 
+        <ul class="dropdown-menu" aria-labelledby="dropdownProfile">
+          <li><%= link_to "Voir mon profil", user_path(current_user), class: "dropdown-item" %></li>
+          <li><%= link_to "Me déconnecter", destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
+        </ul>
+      </div>
+
+      <div class="navbar-links">
         <%= link_to root_path, class: 'navbar-link' do %>
           <i class="fa-regular fa-calendar"></i>
           <p class="btn-text">Objectif</p>
@@ -35,22 +42,22 @@
       </div>
 
     <% end %>
-  </div>
 
-<div class="navbar-search" data-controller="book-search">
-  <form data-action="submit->book-search#search">
-    <div class="search">
-      <input class="search-input" id="search-input" type="search" placeholder="Rechercher un livre" data-book-search-target="query">
-      <button type="submit" class="search-icon">
-        <i class="fa-solid fa-magnifying-glass"></i>
-      </button>
+
+    <div class="navbar-search" data-controller="book-search">
+      <form data-action="submit->book-search#search">
+        <div class="search">
+          <input class="search-input" id="search-input" type="search" placeholder="Rechercher un livre" data-book-search-target="query">
+          <button type="submit" class="search-icon">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+      </form>
+      <% if flash[:alert] %>
+        <p class="error-message"><%= flash[:alert] %></p>
+      <% end %>
+      <div id="search-results" data-book-search-target="results"></div>
     </div>
-  </form>
-    <% if flash[:alert] %>
-      <p class="error-message"><%= flash[:alert] %></p>
-  <% end %>
-  <div id="search-results" data-book-search-target="results"></div>
-</div>
 
   </div>
 </div>
