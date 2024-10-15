@@ -1,3 +1,28 @@
 <%= link_to 'Modifier', edit_book_path(@book), class: 'btn btn-secondary' %>
 <%= link_to 'Supprimer', book_path(@book), data: { "turbo-method": :delete }, class: 'btn btn-danger' %>
 <%= link_to "Retour à ma bibliothèque", books_path  %>
+
+<%= @book.title %>
+<%= @book.author %>
+<%= @book.published_year %>
+<%= @book.number_of_pages %>
+
+<p>Ajoutez une description</p>
+
+<p>Ma lecture</p>
+<% user_reading = @book.readings.find_by(user: current_user) %>
+
+<% if user_reading %>
+  <p><%= user_reading.status.humanize %></p>
+<% else %>
+  <p>Aucune lecture en cours</p>
+<% end %>
+
+
+<%= simple_form_for [@book, @reading] do |f| %>
+  <%= f.input :status, collection: Reading::STATUSES.map { |key, value| [value.humanize, value] }, prompt: 'Sélectionner un statut', label: 'Statut' %>
+  <%= f.input :start_date, as: :date, label: 'Date de début', include_blank: true %>
+  <%= f.input :end_date, as: :date, label: 'Date de fin', include_blank: true %>
+  <%= f.input :number_pages_read, as: :integer, label: 'Pages lues' %>
+  <%= f.button :submit, 'Enregistrer', class: 'btn btn-primary' %>
+<% end %>
