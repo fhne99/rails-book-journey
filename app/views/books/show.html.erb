@@ -10,10 +10,12 @@
 <p>Ajoutez une description</p>
 
 <p>Ma lecture</p>
-<% user_reading = @book.readings.find_by(user: current_user) %>
 
-<% if user_reading %>
-  <p><%= user_reading.status.humanize %></p>
+<% if @reading %>
+  <p><%= @reading.status.humanize %></p>
+  <p><%= @reading.start_date %></p>
+  <p><%= @reading.end_date %></p>
+  <p><%= @reading.number_pages_read %></p>
 <% else %>
   <p>Aucune lecture en cours</p>
 <% end %>
