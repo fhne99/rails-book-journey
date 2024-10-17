@@ -13,6 +13,17 @@ class ReadingsController < ApplicationController
     end
   end
 
+  def update
+    @book = Book.find(params[:book_id])
+    @reading = @book.readings.find(params[:id])
+
+    if @reading.update(reading_params)
+      redirect_to @book, notice: 'Lecture mise à jour avec succès.'
+    else
+      render 'books/show', status: :unprocessable_entity
+    end
+  end
+
   private
 
   def set_book
