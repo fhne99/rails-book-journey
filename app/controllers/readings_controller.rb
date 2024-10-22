@@ -1,5 +1,10 @@
 class ReadingsController < ApplicationController
-  before_action :set_book, only: [:create]
+  before_action :set_book
+  before_action :set_reading, only: [:update, :destroy]
+
+  def index
+    @readings = current_user.readings
+  end
 
   def create
     @reading = Reading.new(reading_params)
@@ -14,9 +19,6 @@ class ReadingsController < ApplicationController
   end
 
   def update
-    @book = Book.find(params[:book_id])
-    @reading = @book.readings.find(params[:id])
-
     if @reading.update(reading_params)
       redirect_to @book, notice: 'Lecture mise à jour avec succès.'
     else
@@ -24,10 +26,19 @@ class ReadingsController < ApplicationController
     end
   end
 
+  def destroy
+    @reading.destroy
+    redirect_to @book, notice: 'Lecture supprimée avec succès.'
+  end
+
   private
 
   def set_book
     @book = Book.find(params[:book_id])
+  end
+
+  def set_reading
+    @reading = @book.readings.find(params[:id])
   end
 
   def reading_params

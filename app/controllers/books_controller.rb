@@ -11,7 +11,7 @@ class BooksController < ApplicationController
   end
 
   def show
-    @reading = @book.readings.find_by(user: current_user)
+    @reading = @book.readings.find_or_initialize_by(user: current_user)
   end
 
   def new

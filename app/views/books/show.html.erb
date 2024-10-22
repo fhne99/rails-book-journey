@@ -12,6 +12,10 @@
 <p>Ma lecture</p>
 
 <% if @reading.persisted? %>
+  <p><%= @reading.status %></p>
+  <p><%= @reading.start_date %></p>
+  <p><%= @reading.end_date %></p>
+  <p><%= @reading.number_pages_read %></p>
   <h3>Modifier ma lecture</h3>
   <%= simple_form_for [@book, @reading], method: :patch do |f| %>
     <%= f.input :status, collection: Reading::STATUSES.map { |key, value| [value.humanize, value] }, prompt: 'Sélectionner un statut', label: 'Statut' %>
@@ -19,8 +23,10 @@
     <%= f.input :end_date, as: :date, label: 'Date de fin' %>
     <%= f.input :number_pages_read, as: :integer, label: 'Pages lues' %>
     <%= f.submit 'Modifier ma lecture', class: 'btn btn-primary' %>
+    <%= link_to "Supprimer ma lecture", book_reading_path(@book, @reading), data: { turbo_method: :delete }, class: "btn btn-danger" %>
   <% end %>
 <% else %>
+  <p>Aucune lecture en cours</p>
   <h3>Commencer une nouvelle lecture</h3>
   <%= simple_form_for [@book, @reading] do |f| %>
     <%= f.input :status, collection: Reading::STATUSES.map { |key, value| [value.humanize, value] }, prompt: 'Sélectionner un statut', label: 'Statut' %>
@@ -29,13 +35,4 @@
     <%= f.input :number_pages_read, as: :integer, label: 'Pages lues' %>
     <%= f.button :submit, 'Enregistrer', class: 'btn btn-primary' %>
   <% end %>
-<% end %>
-
-<% if @reading %>
-  <p><%= @reading.status.humanize %></p>
-  <p><%= @reading.start_date %></p>
-  <p><%= @reading.end_date %></p>
-  <p><%= @reading.number_pages_read %></p>
-<% else %>
-  <p>Aucune lecture en cours</p>
 <% end %>
