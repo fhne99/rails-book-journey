@@ -11,6 +11,24 @@
 
 <p>Ma lecture</p>
 
+<p><strong>Note :</strong>
+  <% if @rating %>
+    <%= @rating.note %> / 5
+  <% else %>
+    Aucune note attribuée
+  <% end %>
+</p>
+
+<h3>Évaluer ce livre</h3>
+<%= simple_form_for [@book, @rating] do |f| %>
+  <%= f.input :note, as: :select, collection: (1..5).to_a, label: 'Note' %>
+  <%= f.button :submit %>
+  <% if @rating.persisted? %>
+    <%= link_to "Supprimer ma note", book_rating_path(@book, @rating), data: { turbo_method: :delete }, class: "btn btn-danger" %>
+  <% end %>
+<% end %>
+
+
 <% if @reading.persisted? %>
   <p><%= @reading.status %></p>
   <p><%= @reading.start_date %></p>

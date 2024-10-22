@@ -12,6 +12,7 @@ class BooksController < ApplicationController
 
   def show
     @reading = @book.readings.find_or_initialize_by(user: current_user)
+    @rating = @book.ratings.find_or_initialize_by(user: current_user)
   end
 
   def new
