@@ -12,15 +12,15 @@ class RatingsController < ApplicationController
     @rating.user = current_user
 
     if @rating.save
-      redirect_to @book, notice: 'Votre lecture a bien été enregistrée.'
+      redirect_to @book, notice: 'Votre note a bien été enregistrée.'
     else
-      redirect_to @book, alert: 'Une erreur est survenue lors de la création de votre lecture.'
+      redirect_to @book, alert: 'Une erreur est survenue lors de la création de votre note.'
     end
   end
 
   def update
     if @rating.update(rating_params)
-      redirect_to @book, notice: 'Lecture mise à jour avec succès.'
+      redirect_to @book, notice: 'Note mise à jour avec succès.'
     else
       render 'books/show', status: :unprocessable_entity
     end
@@ -28,7 +28,7 @@ class RatingsController < ApplicationController
 
   def destroy
     @rating.destroy
-    redirect_to @book, notice: 'Lecture supprimée avec succès.'
+    redirect_to @book, notice: 'Note supprimée avec succès.'
   end
 
   private
