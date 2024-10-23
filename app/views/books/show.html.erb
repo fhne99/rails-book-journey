@@ -19,22 +19,26 @@
   <% end %>
 </p>
 
-<h3>Évaluer ce livre</h3>
-<%= simple_form_for [@book, @rating] do |f| %>
-  <%= f.input :note, as: :select, collection: (1..5).to_a, label: 'Note' %>
-  <%= f.button :submit %>
-  <% if @rating.persisted? %>
-    <%= link_to "Supprimer ma note", book_rating_path(@book, @rating), data: { turbo_method: :delete }, class: "btn btn-danger" %>
+<% if @rating %>
+  <h3>Évaluer ce livre</h3>
+  <%= simple_form_for [@book, @rating] do |f| %>
+    <%= f.input :note, as: :select, collection: (1..5).to_a, label: 'Note' %>
+    <%= f.button :submit %>
+    <% if @rating.persisted? %>
+      <%= link_to "Supprimer ma note", book_rating_path(@book, @rating), data: { turbo_method: :delete }, class: "btn btn-danger" %>
+    <% end %>
   <% end %>
 <% end %>
 
+
 <% if @comment.persisted? %>
-<%= @comment.content %>
+  <%= @comment.content %>
+  <h3>Modifier votre commentaire</h3>
   <%= simple_form_for [@book, @comment], method: :patch do |f| %>
-        <%= f.input :content, label: 'Modifier le commentaire' %>
-        <%= f.button :submit, "Mettre à jour" %>
-        <%= link_to "Supprimer mon commentaire", book_comment_path(@book, @comment), data: { turbo_method: :delete }, class: "btn btn-danger" %>
-      <% end %>
+    <%= f.input :content, label: 'Modifier le commentaire', input_html: { value: @comment.content } %>
+    <%= f.button :submit, "Mettre à jour" %>
+  <% end %>
+  <%= link_to 'Supprimer', book_comment_path(@book, @comment), data: { turbo_method: :delete }, class: 'btn btn-danger' %>
 <% else %>
   <h4>Ajouter un commentaire</h4>
   <%= simple_form_for [@book, @comment] do |f| %>
@@ -49,6 +53,7 @@
   <p><%= @reading.start_date %></p>
   <p><%= @reading.end_date %></p>
   <p><%= @reading.number_pages_read %></p>
+  <p><strong>Progression de lecture :</strong> <%= @reading.completion_percentage %> %</p>
   <h3>Modifier ma lecture</h3>
   <%= simple_form_for [@book, @reading], method: :patch do |f| %>
     <%= f.input :status, collection: Reading::STATUSES.map { |key, value| [value.humanize, value] }, prompt: 'Sélectionner un statut', label: 'Statut' %>
