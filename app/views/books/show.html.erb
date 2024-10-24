@@ -49,20 +49,28 @@
 
 
 <% if @reading.persisted? %>
-  <p><%= @reading.status %></p>
+  <p><%= @reading.status.humanize %></p>
   <p><%= @reading.start_date %></p>
   <p><%= @reading.end_date %></p>
   <p><%= @reading.number_pages_read %></p>
   <p><strong>Progression de lecture :</strong> <%= @reading.completion_percentage %> %</p>
+
   <h3>Modifier ma lecture</h3>
-  <%= simple_form_for [@book, @reading], method: :patch do |f| %>
-    <%= f.input :status, collection: Reading::STATUSES.map { |key, value| [value.humanize, value] }, prompt: 'Sélectionner un statut', label: 'Statut' %>
+  <%= simple_form_for [@book, @reading], method: :patch, html: { data: { controller: "reading-form", action: "change->reading-form#statusChanged" } } do |f| %>
+  <%= f.input :status, collection: Reading::STATUSES.map { |key, value| [value.humanize, value] }, prompt: 'Sélectionner un statut', label: 'Statut', input_html: { data: { reading_form_target: 'status' } } %>
+
+  <div data-reading-form-target="startDate" class="hidden">
     <%= f.input :start_date, as: :date, label: 'Date de début' %>
+  </div> <!-- Ajoute cette balise de fermeture ici -->
+
+  <div data-reading-form-target="endDate" class="hidden">
     <%= f.input :end_date, as: :date, label: 'Date de fin' %>
-    <%= f.input :number_pages_read, as: :integer, label: 'Pages lues' %>
-    <%= f.submit 'Modifier ma lecture', class: 'btn btn-primary' %>
-    <%= link_to "Supprimer ma lecture", book_reading_path(@book, @reading), data: { turbo_method: :delete }, class: "btn btn-danger" %>
-  <% end %>
+  </div> <!-- Ajoute cette balise de fermeture ici -->
+
+  <%= f.input :number_pages_read, as: :integer, label: 'Pages lues' %>
+  <%= f.submit 'Modifier ma lecture', class: 'btn btn-primary' %>
+  <%= link_to "Supprimer ma lecture", book_reading_path(@book, @reading), data: { turbo_method: :delete }, class: "btn btn-danger" %>
+<% end %>
 <% else %>
   <p>Aucune lecture en cours</p>
   <h3>Commencer une nouvelle lecture</h3>
