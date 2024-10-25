@@ -17,7 +17,7 @@ class Reading < ApplicationRecord
 
   def reading_duration
     case status
-    when 'completed'
+    when 'finished'
       if start_date && end_date
         (end_date - start_date).to_i
       end
@@ -35,7 +35,7 @@ class Reading < ApplicationRecord
       errors.add(:base, "Vous ne pouvez pas entrer de dates pour une lecture en attente.")
     elsif status == 'in_progress' && end_date.present?
       errors.add(:end_date, "La date de fin ne doit pas être saisie tant que la lecture est en cours.")
-    elsif status == 'completed' && (start_date.blank? || end_date.blank?)
+    elsif status == 'finished' && (start_date.blank? || end_date.blank?)
       errors.add(:base, "Veuillez entrer les dates de début et de fin pour une lecture terminée.")
     end
   end

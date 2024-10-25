@@ -1,29 +1,25 @@
-import { Controller } from 'stimulus'
+import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ['startDate', 'endDate', 'status']
+  static targets = ["status", "startDate", "endDate"]
 
   connect() {
-    this.toggleDateFields()
-    console.log("reading form controller connected")
+    console.log("ReadingFormController connected.")
+    this.updateForm()  // Initial setup of the form based on the selected status
   }
 
-  toggleDateFields() {
-    const statusValue = this.statusTarget.value
+  updateForm() {
+    const status = this.statusTarget.value
+    console.log("Selected status:", status)
 
-    if (statusValue === 'not_started') {
-      this.startDateTarget.classList.add('hidden')
-      this.endDateTarget.classList.add('hidden')
-    } else if (statusValue === 'in_progress') {
-      this.startDateTarget.classList.remove('hidden')
-      this.endDateTarget.classList.add('hidden')
-    } else if (statusValue === 'completed') {
-      this.startDateTarget.classList.remove('hidden')
-      this.endDateTarget.classList.remove('hidden')
+    this.startDateTarget.classList.add("hidden")
+    this.endDateTarget.classList.add("hidden")
+
+    if (status === "lecture_en_cours") {
+      this.startDateTarget.classList.remove("hidden")
+    } else if (status === "lecture_terminée") {
+      this.startDateTarget.classList.remove("hidden")
+      this.endDateTarget.classList.remove("hidden")
     }
-  }
-
-  statusChanged() {
-    this.toggleDateFields()
   }
 }

@@ -19,14 +19,14 @@ class ReadingsController < ApplicationController
   end
 
   def update
-    @book = Book.find(params[:book_id]) # Assure que tu as bien le @book
+    @book = Book.find(params[:book_id])
 
     if @reading.update(reading_params)
       redirect_to @book, notice: "Lecture mise à jour avec succès."
     else
       @comment = @book.comments.find_by(user: current_user) || @book.comments.build
       @rating = @book.ratings.find_by(user: current_user) || @book.ratings.build
-      render "books/show" # Re-rendering the show view with necessary variables
+      render "books/show"
     end
   end
 
