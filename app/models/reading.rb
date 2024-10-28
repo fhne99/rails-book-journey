@@ -15,28 +15,17 @@ class Reading < ApplicationRecord
     ((number_pages_read.to_f / book.number_of_pages) * 100).round(2)
   end
 
-  def reading_duration
-    case status
-    when 'finished'
-      if start_date && end_date
-        (end_date - start_date).to_i
-      end
-    when 'in_progress'
-      if start_date
-        (Date.today - start_date).to_i
-      end
-    else
-      0
-    end
-  end
+  def reading_time
+    return "Pas de start_date" unless start_date.present?
+    return "Pas de end_date pour completed" if status == "lecture_terminée" && end_date.blank?
 
-  def validate_dates_based_on_status
-    if status == 'not_started' && (start_date.present? || end_date.present?)
-      errors.add(:base, "Vous ne pouvez pas entrer de dates pour une lecture en attente.")
-    elsif status == 'in_progress' && end_date.present?
-      errors.add(:end_date, "La date de fin ne doit pas être saisie tant que la lecture est en cours.")
-    elsif status == 'finished' && (start_date.blank? || end_date.blank?)
-      errors.add(:base, "Veuillez entrer les dates de début et de fin pour une lecture terminée.")
+    case status
+    when "lecture_en_cours"
+      "#{(Date.today - start_date).to_i} jours écoulés"
+    when "lecture_terminée"
+      "#{(end_date - start_date).to_i} jours de lecture"
+    else
+      "Statut non pris en charge pour le calcul du temps de lecture"
     end
   end
 end

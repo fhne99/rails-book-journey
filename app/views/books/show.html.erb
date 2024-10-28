@@ -54,49 +54,41 @@
   <p><%= @reading.end_date %></p>
   <p><%= @reading.number_pages_read %></p>
   <p><strong>Progression de lecture :</strong> <%= @reading.completion_percentage %> %</p>
+  <p><strong>Temps de lecture :</strong> <%= @reading.reading_time %></p>
 
   <h3>Modifier ma lecture</h3>
-
-    <%= simple_form_for [@book, @reading], method: :patch, html: { data: { controller: "reading-form" } } do |f| %>
-  <%= f.input :status,
-              collection: Reading::STATUSES.map { |key, value| [value.humanize, value] },
-              prompt: 'Sélectionner un statut',
-              label: 'Statut',
-              input_html: { data: { reading_form_target: "status", action: "change->reading-form#updateForm" } } %>
-
-  <div data-reading-form-target="startDate" class="hidden">
-    <%= f.input :start_date, as: :date, label: 'Date de début' %>
-  </div>
-
-  <div data-reading-form-target="endDate" class="hidden">
-    <%= f.input :end_date, as: :date, label: 'Date de fin' %>
-  </div>
-
-
+  <%= simple_form_for [@book, @reading], method: :patch, html: { data: { controller: "reading-form" } } do |f| %>
+    <%= f.input :status,
+                collection: Reading::STATUSES.map { |key, value| [value.humanize, value] },
+                prompt: 'Sélectionner un statut',
+                label: 'Statut',
+                input_html: { data: { reading_form_target: "status", action: "change->reading-form#updateForm" } } %>
+    <div data-reading-form-target="startDate" class="hidden">
+      <%= f.input :start_date, as: :date, label: 'Date de début' %>
+    </div>
+    <div data-reading-form-target="endDate" class="hidden">
+      <%= f.input :end_date, as: :date, label: 'Date de fin' %>
+    </div>
     <%= f.input :number_pages_read, as: :integer, label: 'Pages lues' %>
     <%= f.submit 'Modifier ma lecture', class: 'btn btn-primary' %>
     <%= link_to "Supprimer ma lecture", book_reading_path(@book, @reading), data: { turbo_method: :delete }, class: "btn btn-danger" %>
-    <% end %>
+  <% end %>
 
 <% else %>
   <p>Aucune lecture en cours</p>
   <h3>Commencer une nouvelle lecture</h3>
   <%= simple_form_for [@book, @reading], html: { data: { controller: "reading-form" } } do |f| %>
-  <%= f.input :status,
-              collection: Reading::STATUSES.map { |key, value| [value.humanize, value] },
-              prompt: 'Sélectionner un statut',
-              label: 'Statut',
-              input_html: { data: { reading_form_target: "status", action: "change->reading-form#updateForm" } } %>
-
-  <div data-reading-form-target="startDate" class="hidden">
-    <%= f.input :start_date, as: :date, label: 'Date de début' %>
-  </div>
-
-  <div data-reading-form-target="endDate" class="hidden">
-    <%= f.input :end_date, as: :date, label: 'Date de fin' %>
-  </div>
-
-
+    <%= f.input :status,
+                collection: Reading::STATUSES.map { |key, value| [value.humanize, value] },
+                prompt: 'Sélectionner un statut',
+                label: 'Statut',
+                input_html: { data: { reading_form_target: "status", action: "change->reading-form#updateForm" } } %>
+    <div data-reading-form-target="startDate" class="hidden">
+      <%= f.input :start_date, as: :date, label: 'Date de début' %>
+    </div>
+    <div data-reading-form-target="endDate" class="hidden">
+      <%= f.input :end_date, as: :date, label: 'Date de fin' %>
+    </div>
     <%= f.input :number_pages_read, as: :integer, label: 'Pages lues' %>
     <%= f.button :submit, 'Enregistrer', class: 'btn btn-primary' %>
   <% end %>
