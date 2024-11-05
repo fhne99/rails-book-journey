@@ -15,17 +15,41 @@ class Reading < ApplicationRecord
     ((number_pages_read.to_f / book.number_of_pages) * 100).round(2)
   end
 
-  def reading_time
-    return "Pas de start_date" unless start_date.present?
-    return "Pas de end_date pour completed" if status == "lecture_terminée" && end_date.blank?
+  def reading_duration
+    return "En attente de début" if start_date.nil?
 
-    case status
-    when "lecture_en_cours"
-      "#{(Date.today - start_date).to_i} jours écoulés"
-    when "lecture_terminée"
-      "#{(end_date - start_date).to_i} jours de lecture"
+    if end_date.nil?
+      calculate_duration_between(start_date, Date.today)
     else
-      "Statut non pris en charge pour le calcul du temps de lecture"
+      calculate_duration_between(start_date, end_date)
     end
+  end
+
+  private
+
+  def calculate_duration_between(start_date, end_date)
+    years = end_date.year - start_date.year
+    months = end_date.month - start_date.month
+    days = end_date.day - start_date.day
+
+    if days.negative?
+      months -= 1
+      days += (end_date - end_date.prev_month).to_i
+    end
+
+    if months.negative?
+      years -= 1
+      months += 12
+    end
+
+    format_duration(years, months, days)
+  end
+
+  def format_duration(years, months, days)
+    [].tap do |parts|
+      parts << "#{years} ans#{'s' if years > 1}" if years.positive?
+      parts << "#{months} mois" if months.positive?
+      parts << "#{days} jour#{'s' if days > 1}" if days.positive?
+    end.join(", ")
   end
 end

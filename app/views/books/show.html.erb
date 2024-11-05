@@ -54,7 +54,7 @@
   <p><%= @reading.end_date %></p>
   <p><%= @reading.number_pages_read %></p>
   <p><strong>Progression de lecture :</strong> <%= @reading.completion_percentage %> %</p>
-  <p><strong>Temps de lecture :</strong> <%= @reading.reading_time %></p>
+  <p><strong>Temps de lecture :</strong> <%= @reading.reading_duration %></p>
 
   <h3>Modifier ma lecture</h3>
   <%= simple_form_for [@book, @reading], method: :patch, html: { data: { controller: "reading-form" } } do |f| %>
