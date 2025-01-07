@@ -16,7 +16,7 @@ export default class extends Controller {
     fetch(`https://openlibrary.org/search.json?q=${query}`)
       .then(response => response.json())
       .then(data => {
-        const firstTenBooks = data.docs.slice(0, 10)
+        const firstTenBooks = data.docs.slice(0, 12)
         const extractedData = firstTenBooks.map(book => ({
           title: book.title,
           author: book.author_name ? book.author_name.join(', ') : "Auteur inconnu",
